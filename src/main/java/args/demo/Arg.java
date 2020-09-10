@@ -19,7 +19,7 @@ public class Arg {
         boolean isValueValid = !value.contains(" ");
         boolean isArgValid = isFlagValid && isValueValid;
         if(!isArgValid) {
-            throw new RuntimeException("Invalid arg");
+            throw new InvalidArg(flag);
         }
     }
 

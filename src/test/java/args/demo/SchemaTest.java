@@ -38,22 +38,16 @@ public class SchemaTest {
         String flag = "m";
         Schema schema = new Schema(flagSchemas);
 
-        //when
-        Exception exception = assertThrows(RuntimeException.class, () -> schema.getTypeOf(flag));
-
         //then
-        assertEquals("Flag not found", exception.getMessage());
+        assertThrows(FlagNotFound.class, () -> schema.getTypeOf(flag));
     }
 
-    @Test
+    @Test()
     void should_return_error_message_given_schema_duplicate_flag_l() {
         //given
         flagSchemas.add(new FlagSchema("p", ValueType.BOOLEAN));
 
-        //when
-        Exception exception = assertThrows(RuntimeException.class, () -> new Schema(flagSchemas));
-
         //then
-        assertEquals("Schema flag duplicated", exception.getMessage());
+        assertThrows(SchemaFlagDuplicated.class, () -> new Schema(flagSchemas));
     }
 }

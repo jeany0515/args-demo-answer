@@ -81,11 +81,8 @@ public class ArgTest {
         String argPair = "pp 8080";
         Schema schema = new Schema(flagSchemas);
 
-        //when
-        Exception exception = assertThrows(RuntimeException.class, () -> new Arg(argPair, schema));
-
         //then
-        assertEquals("Invalid arg", exception.getMessage());
+        assertThrows(InvalidArg.class, () -> new Arg(argPair, schema));
     }
 
     @Test
@@ -94,11 +91,8 @@ public class ArgTest {
         String argPair = "p 80 80";
         Schema schema = new Schema(flagSchemas);
 
-        //when
-        Exception exception = assertThrows(RuntimeException.class, () -> new Arg(argPair, schema));
-
         //then
-        assertEquals("Invalid arg", exception.getMessage());
+        assertThrows(InvalidArg.class, () -> new Arg(argPair, schema));
     }
 
     @Test

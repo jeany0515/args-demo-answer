@@ -30,7 +30,7 @@ public class Args {
 
     private void isStartWithFlag() {
         if (args.length() == 0 || !args.startsWith("-")) {
-            throw new RuntimeException("Arg format invalid");
+            throw new InvalidArgs(args);
         }
     }
 
@@ -38,7 +38,7 @@ public class Args {
         List<String> distinctFlags = argPairs.stream().map(Arg::getFlag).distinct().collect(Collectors.toList());
         boolean isFlagDuplicated = distinctFlags.size() != argPairs.size();
         if(isFlagDuplicated) {
-            throw new RuntimeException("Args flag duplicated");
+            throw new ArgsFlagDuplicated();
         }
     }
 

@@ -41,11 +41,8 @@ public class ArgsTest {
         String argsString = "p 8080";
         Schema schema = new Schema(flagSchemas);
 
-        //when
-        Exception exception = assertThrows(RuntimeException.class, () -> new Args(argsString, schema));
-
         //then
-        assertEquals("Arg format invalid", exception.getMessage());
+        assertThrows(InvalidArgs.class, () -> new Args(argsString, schema));
     }
 
     @Test
@@ -54,10 +51,8 @@ public class ArgsTest {
         String argsString = "-p 8080 -p true";
         Schema schema = new Schema(flagSchemas);
 
-        //when
-        Exception exception = assertThrows(RuntimeException.class, () -> new Args(argsString, schema));
-
         //then
-        assertEquals("Args flag duplicated", exception.getMessage());
+        assertThrows(ArgsFlagDuplicated.class, () -> new Args(argsString, schema));
+
     }
 }
