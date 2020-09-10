@@ -43,6 +43,6 @@ public class Args {
     }
 
     public Object getValueOf(String flag) {
-        return argPairs.stream().filter(arg -> arg.withFlag(flag)).findFirst().get().getValue();
+        return argPairs.stream().filter(arg -> arg.withFlag(flag)).findFirst().get().parseValue();
     }
 }

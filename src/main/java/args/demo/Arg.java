@@ -1,8 +1,5 @@
 package args.demo;
 
-import static java.lang.Boolean.parseBoolean;
-import static java.lang.Integer.parseInt;
-
 public class Arg {
     private final String flag;
     private final String value;
@@ -13,9 +10,8 @@ public class Arg {
 
         this.flag = flagValues[0];
         this.value = flagValues.length == 2 ? flagValues[1] : schema.getDefaultValueOf(this.flag).toString();
-        this.type = schema.getTypeOf(this.flag);
-
         isArgValid();
+        this.type = schema.getTypeOf(this.flag);
     }
 
     private void isArgValid() {
@@ -27,12 +23,12 @@ public class Arg {
         }
     }
 
-    public Object getValue() {
+    public Object parseValue() {
         switch (type) {
             case "boolean":
-                return parseBoolean(value);
+                return new BooleanParser().parse(value);
             case "integer":
-                return parseInt(value);
+                return new IntParser().parse(value);
             default:
                 return value;
         }

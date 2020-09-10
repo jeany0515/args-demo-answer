@@ -27,7 +27,7 @@ public class ArgTest {
         Arg arg = new Arg(argPair, schema);
 
         //when
-        Object actual = arg.getValue();
+        Object actual = arg.parseValue();
 
         //then
         assertEquals(8080, actual);
@@ -41,7 +41,7 @@ public class ArgTest {
         Arg arg = new Arg(argPair, schema);
 
         //when
-        Object actual = arg.getValue();
+        Object actual = arg.parseValue();
 
         //then
         assertEquals(true, actual);
@@ -55,7 +55,7 @@ public class ArgTest {
         Arg arg = new Arg(argPair, schema);
 
         //when
-        Object actual = arg.getValue();
+        Object actual = arg.parseValue();
 
         //then
         assertEquals("yes", actual);
@@ -109,7 +109,7 @@ public class ArgTest {
         Arg arg = new Arg(argPair, schema);
 
         //when
-        Object actual = arg.getValue();
+        Object actual = arg.parseValue();
 
         //then
         assertEquals(false, actual);
@@ -123,7 +123,7 @@ public class ArgTest {
         Arg arg = new Arg(argPair, schema);
 
         //when
-        Object actual = arg.getValue();
+        Object actual = arg.parseValue();
 
         //then
         assertEquals(0, actual);
