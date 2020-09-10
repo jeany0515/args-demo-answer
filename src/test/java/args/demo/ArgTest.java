@@ -100,4 +100,32 @@ public class ArgTest {
         //then
         assertEquals("Invalid arg", exception.getMessage());
     }
+
+    @Test
+    void should_return_default_value_when_get_value_given_arg_only_flag_l() {
+        //given
+        String argPair = "l";
+        Schema schema = new Schema(flagSchemas);
+        Arg arg = new Arg(argPair, schema);
+
+        //when
+        Object actual = arg.getValue();
+
+        //then
+        assertEquals(false, actual);
+    }
+
+    @Test
+    void should_return_default_value_when_get_value_given_arg_only_flag_p() {
+        //given
+        String argPair = "p";
+        Schema schema = new Schema(flagSchemas);
+        Arg arg = new Arg(argPair, schema);
+
+        //when
+        Object actual = arg.getValue();
+
+        //then
+        assertEquals(0, actual);
+    }
 }

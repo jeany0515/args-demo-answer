@@ -35,7 +35,7 @@ public class Args {
     }
 
     private void isFlagDistinct() {
-        List<String> distinctFlags = argPairs.stream().map(Arg::geFlag).distinct().collect(Collectors.toList());
+        List<String> distinctFlags = argPairs.stream().map(Arg::getFlag).distinct().collect(Collectors.toList());
         boolean isFlagDuplicated = distinctFlags.size() != argPairs.size();
         if(isFlagDuplicated) {
             throw new RuntimeException("Args flag duplicated");

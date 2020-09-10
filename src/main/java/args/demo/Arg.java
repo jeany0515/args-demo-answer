@@ -11,16 +11,16 @@ public class Arg {
     public Arg(String argPair, Schema schema) {
         String[] flagValues = argPair.trim().split("\\s+", 2);
 
-        isArgValid(flagValues);
-
         this.flag = flagValues[0];
-        this.value = flagValues[1];
+        this.value = flagValues.length == 2 ? flagValues[1] : schema.getDefaultValueOf(this.flag).toString();
         this.type = schema.getTypeOf(this.flag);
+
+        isArgValid();
     }
 
-    private void isArgValid(String[] flagValues) {
-        boolean isFlagValid = flagValues[0].length() == 1;
-        boolean isValueValid = !flagValues[1].contains(" ");
+    private void isArgValid() {
+        boolean isFlagValid = flag.length() == 1;
+        boolean isValueValid = !value.contains(" ");
         boolean isArgValid = isFlagValid && isValueValid;
         if(!isArgValid) {
             throw new RuntimeException("Invalid arg");
@@ -43,7 +43,7 @@ public class Arg {
         return this.flag.equals(flag);
     }
 
-    public String geFlag() {
+    public String getFlag() {
         return this.flag;
     }
 }

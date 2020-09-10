@@ -25,4 +25,8 @@ public class Schema {
             throw new RuntimeException("Flag not found");
         }
     }
+
+    public Object getDefaultValueOf(String flag) {
+        return flagSchemas.stream().filter(flagSchema -> flagSchema.getFlag().equals(flag)).findFirst().get().getDefaultValue();
+    }
 }
