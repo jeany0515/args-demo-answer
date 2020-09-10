@@ -30,4 +30,8 @@ public class Arg {
     public boolean withFlag(String flag) {
         return this.flag.equals(flag);
     }
+
+    public String geFlag() {
+        return this.flag;
+    }
 }

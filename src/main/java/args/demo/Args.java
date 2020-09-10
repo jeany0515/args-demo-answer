@@ -3,13 +3,22 @@ package args.demo;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Args {
-    private final List<Arg> arg = new ArrayList<>();
+    private final List<Arg> argPairs = new ArrayList<>();
+    private final String args;
 
-    public Args(String command, Schema schema) {
-        List<String> args = splitToArgs(command);
-        args.forEach(arg -> this.arg.add(new Arg(arg, schema)));
+    public Args(String args, Schema schema) {
+        this.args = args.trim();
+        isStartWithFlag();
+        mapToArgPairs(args, schema);
+        isFlagDistinct();
+    }
+
+    private void mapToArgPairs(String args, Schema schema) {
+        List<String> argPairs = splitToArgs(args);
+        argPairs.forEach(arg -> this.argPairs.add(new Arg(arg, schema)));
     }
 
     private List<String> splitToArgs(String command) {
@@ -19,7 +28,21 @@ public class Args {
         return args;
     }
 
+    private void isStartWithFlag() {
+        if (args.length() == 0 || !args.startsWith("-")) {
+            throw new RuntimeException("Arg format invalid");
+        }
+    }
+
+    private void isFlagDistinct() {
+        List<String> distinctFlags = argPairs.stream().map(Arg::geFlag).distinct().collect(Collectors.toList());
+        boolean isFlagDuplicated = distinctFlags.size() != argPairs.size();
+        if(isFlagDuplicated) {
+            throw new RuntimeException("Args flag duplicated");
+        }
+    }
+
     public Object getValueOf(String flag) {
-        return arg.stream().filter(arg -> arg.withFlag(flag)).findFirst().get().getValue();
+        return argPairs.stream().filter(arg -> arg.withFlag(flag)).findFirst().get().getValue();
     }
 }
