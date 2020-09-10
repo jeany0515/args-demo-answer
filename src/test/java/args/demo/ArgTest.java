@@ -3,6 +3,7 @@ package args.demo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ArgTest {
     @Test
@@ -30,7 +31,7 @@ public class ArgTest {
         boolean actual = arg.withFlag("l");
 
         //then
-        assertEquals(false, actual);
+        assertFalse(actual);
     }
 
 
