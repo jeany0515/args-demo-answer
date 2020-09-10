@@ -17,7 +17,7 @@ public class FlagSchema {
         return this.valueType.getDefaultValue();
     }
 
-    public boolean withFlag(String flag) {
-        return this.flag.equals(flag);
+    public String getFlag() {
+        return flag;
     }
 }

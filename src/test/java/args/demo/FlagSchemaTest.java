@@ -30,14 +30,14 @@ public class FlagSchemaTest {
     }
 
     @Test
-    void should_return_true_when_check_if_with_flag_p_given_p_string() {
+    void should_return_p_when_get_flag_given_p_string() {
         //given
         FlagSchema flagSchema = new FlagSchema("p", ValueType.STRING);
 
         //when
-        boolean actual = flagSchema.withFlag("p");
+        String actual = flagSchema.getFlag();
 
         //then
-        assertTrue(actual);
+        assertEquals("p", actual);
     }
 }
