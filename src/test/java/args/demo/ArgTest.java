@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArgTest {
     private List<FlagSchema> flagSchemas;
@@ -76,5 +75,29 @@ public class ArgTest {
         assertFalse(actual);
     }
 
+    @Test
+    void should_return_error_message_when_flag_length_2() {
+        //given
+        String argPair = "pp 8080";
+        Schema schema = new Schema(flagSchemas);
 
+        //when
+        Exception exception = assertThrows(RuntimeException.class, () -> new Arg(argPair, schema));
+
+        //then
+        assertEquals("Invalid arg", exception.getMessage());
+    }
+
+    @Test
+    void should_return_error_message_when_arg_value_with_blank_space() {
+        //given
+        String argPair = "p 80 80";
+        Schema schema = new Schema(flagSchemas);
+
+        //when
+        Exception exception = assertThrows(RuntimeException.class, () -> new Arg(argPair, schema));
+
+        //then
+        assertEquals("Invalid arg", exception.getMessage());
+    }
 }

@@ -59,6 +59,5 @@ public class ArgsTest {
 
         //then
         assertEquals("Args flag duplicated", exception.getMessage());
-        assertEquals("Args flag duplicated", exception.getMessage());
     }
 }

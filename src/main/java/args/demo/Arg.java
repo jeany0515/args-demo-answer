@@ -9,10 +9,22 @@ public class Arg {
     private final String type;
 
     public Arg(String argPair, Schema schema) {
-        String[] flagValue = argPair.split(" ");
-        this.flag = flagValue[0];
-        this.value = flagValue[1];
+        String[] flagValues = argPair.trim().split("\\s+", 2);
+
+        isArgValid(flagValues);
+
+        this.flag = flagValues[0];
+        this.value = flagValues[1];
         this.type = schema.getTypeOf(this.flag);
+    }
+
+    private void isArgValid(String[] flagValues) {
+        boolean isFlagValid = flagValues[0].length() == 1;
+        boolean isValueValid = !flagValues[1].contains(" ");
+        boolean isArgValid = isFlagValid && isValueValid;
+        if(!isArgValid) {
+            throw new RuntimeException("Invalid arg");
+        }
     }
 
     public Object getValue() {
