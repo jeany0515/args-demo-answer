@@ -24,14 +24,8 @@ public class Arg {
     }
 
     public Object parseValue() {
-        switch (type) {
-            case "boolean":
-                return new BooleanParser().parse(value);
-            case "integer":
-                return new IntParser().parse(value);
-            default:
-                return value;
-        }
+        TypeParser parser = ValueParserFactory.create(type);
+        return parser.handle(value);
     }
 
 
